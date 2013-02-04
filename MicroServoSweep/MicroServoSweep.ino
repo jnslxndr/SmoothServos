@@ -19,7 +19,7 @@
 
 Servo s;
 
-int speed = 1000; // This is in microseconds! Less is faster
+int speed = 10000; // This is in microseconds! Less is faster
 
 void microDegree(float lerp) {
   static int start = 500;
