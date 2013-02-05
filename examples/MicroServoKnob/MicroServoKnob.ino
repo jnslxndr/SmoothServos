@@ -16,23 +16,15 @@
  */
 
 
-#include <Servo.h>
+#include "SmoothServo"
 
-Servo s;
-
-void microDegree(float lerp) {
-  static int start = 500;
-  static int end   = 2500;
-  s.writeMicroseconds(start+(end-start)*lerp);
-  // we must wait a bit to let the servo settle down
-  delayMicroseconds(20);
-}
+SmoothServo s(500,2300);
 
 void setup(){
   s.attach(5);
 }
 
 void loop() {
-  microDegree(analogRead(A0)/1023.0);
+  s.set(analogRead(A0)/1023.0);
 }
 

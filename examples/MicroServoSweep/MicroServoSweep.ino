@@ -15,19 +15,11 @@
  jens alexander ewald, lea.io, 2013
  */
 
-#include <Servo.h>
+#include "SmoothServo.h"
 
-Servo s;
+SmoothServo s(500,2300);
 
 int speed = 10000; // This is in microseconds! Less is faster
-
-void microDegree(float lerp) {
-  static int start = 500;
-  static int end   = 2500;
-  s.writeMicroseconds(start+(end-start)*lerp);
-  // we must wait a bit to let the servo settle down
-  delayMicroseconds(20);
-}
 
 void setup(){
   s.attach(5);
@@ -38,13 +30,13 @@ void setup(){
 void loop() {
   digitalWrite(11,HIGH);
   for(int i=0; i<=1000; i++) {
-    microDegree(i/1000.0);
+    s.set(i/1000.0);
     delayMicroseconds(speed);
   }
   delay(500);
   digitalWrite(11,LOW);
   for(int i=1000; i>=0; i--) {
-    microDegree(i/1000.0);
+    s.set(i/1000.0);
     delayMicroseconds(speed);
   }
   delay(500);
